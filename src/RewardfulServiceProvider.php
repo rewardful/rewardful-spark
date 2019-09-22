@@ -5,9 +5,9 @@ namespace Rewardful\RewardfulSpark;
 use Illuminate\Support\Facades\Blade;
 use Laravel\Spark\Spark;
 use Laravel\Spark\Providers\AppServiceProvider as ServiceProvider;
+use Laravel\Spark\Contracts\Interactions\Subscribe as SubscribeContract;
+use Laravel\Spark\Contracts\Interactions\SubscribeTeam as SubscribeTeamContract;
 use Laravel\Spark\Contracts\Interactions\Settings\PaymentMethod\UpdatePaymentMethod;
-use Rewardful\RewardfulSpark\UpdateStripePaymentMethod;
-
 class RewardfulServiceProvider extends ServiceProvider
 {
     /**
@@ -17,6 +17,8 @@ class RewardfulServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Spark::swap(SubscribeContract::class.'@handle', Subscribe::class.'@handle');
+        Spark::swap(SubscribeTeamContract::class.'@handle', SubscribeTeam::class.'@handle');
         Spark::swap(UpdatePaymentMethod::class.'@handle', UpdateStripePaymentMethod::class.'@handle');
 
         $this->publishes([
