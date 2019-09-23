@@ -47,18 +47,14 @@ class Subscribe extends SubscribeUsingStripe implements Contract
         if (Spark::collectsEuropeanVat()) {
             Spark::call(
                 UserRepository::class.'@updateVatId',
-                [$user, Arr::get($data, 'vat_id')]
+                [$user, array_get($data, 'vat_id')]
             );
-        }
-
-        if (Spark::chargesUsersPerTeam() || Spark::chargesUsersPerSeat()) {
-            $subscription->quantity(Spark::seatsCount($user));
         }
 
         // Here we will create the actual subscription on the service and fire off the event
         // letting other listeners know a user has subscribed, which will allow any hooks
         // to fire that need to send the subscription data to any external metrics app.
-        $subscription->create($data[$this->token] ?? null, [
+        $subscription->create($data[$this->token], [
             'metadata' =>[
                 'referal' => $data['referral'] ?? ''
             ]

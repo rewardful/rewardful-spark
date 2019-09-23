@@ -1,6 +1,14 @@
 module.exports = {
     mounted(){
-        window.addEventListener('Rewardful.tracked', () => {
+        if(typeof(Rewardful) != "undefined"  && Rewardful.referral!==''){
+            this.setReferral();
+        }
+        addEventListener('Rewardful.tracked', () => {
+            this.setReferral();
+          });
+    },
+    methods:{
+        setReferral (){
             if(this.$options.name === 'spark-register-stripe')
             {
                 this.registerForm.referral = Rewardful.referral
@@ -9,6 +17,6 @@ module.exports = {
             {
                 this.form.referral = Rewardful.referral
             }
-          });
+        }
     }
 }
