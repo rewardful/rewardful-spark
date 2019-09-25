@@ -6,7 +6,12 @@ RewardfulSpark is a small library that allows you to integrate your Laravel Spar
 
 First, require the RewardfulSpark package with Composer
 
+For Spark v6 - 8:
 `composer require rewardful/rewardful-spark "2.*"`
+
+For Spark v9.0+, please use branch [v3.0](https://github.com/rewardful/rewardful-spark/tree/3.0).
+
+For Spark v5, please use branch [v1.0](https://github.com/rewardful/rewardful-spark/tree/1.0).
 
 ## Publish the package
 
