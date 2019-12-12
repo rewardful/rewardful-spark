@@ -29,7 +29,7 @@ class UpdateStripePaymentMethod extends UpdatePaymentMethod implements Contract
         if (! $billable->stripe_id) {
             $billable->createAsStripeCustomer([
                 'metadata' =>[
-                    'referal' => $data['referral']
+                    'referral' => $data['referral'] ?? ''
                 ]
             ]);
         }
