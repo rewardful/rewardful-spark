@@ -28,8 +28,10 @@ class RewardfulServiceProvider extends ServiceProvider
         ], 'rewardful-vue');
 
         Blade::directive('rewardful_js', function () {
-            return "<script>(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');</script>
-<script async src='https://r.wdfl.co/rw.js' data-rewardful='".config("rewardful.api_key")."'></script>";
+            $key = config("rewardful.api_key");
+            return "
+<script>(function(w,r){w._rwq=r;w[r]=w[r]||function(){(w[r].q=w[r].q||[]).push(arguments)}})(window,'rewardful');</script>
+<script async src='https://r.wdfl.co/rw.js' data-rewardful='".$key."'></script>";
         });
     }
 }
